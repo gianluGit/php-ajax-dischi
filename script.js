@@ -47,6 +47,5 @@ function getDisc(discs) {
 
 
 $(document).ready(function() {
-  console.log('hello world');
   getData();
 });
