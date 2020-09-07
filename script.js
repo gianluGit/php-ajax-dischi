@@ -7,7 +7,7 @@ function getData() {
 
       var discs = data['response'];
 
-      console.log(discs);
+      // console.log(discs);
 
       getDisc(discs);
 
@@ -32,12 +32,60 @@ function getDisc(discs) {
   for (var i = 0; i < discs.length; i++) {
     var disc = discs[i];
 
-    console.log(disc);
+    // console.log(disc);
 
     var discHTML = compiled(disc);
     target.append(discHTML);
   }
 }
+
+function searchInInput() {
+  var btn = $('#btn');
+
+  btn.click(getGenre);
+
+
+}
+
+
+// PARTE OPZIONALE
+
+function getGenre() {
+
+  var selectVal = $('select.genre').val();
+
+  $('#target').text('');
+  console.log(selectVal);
+
+
+  $.ajax({
+    url: 'genre.php',
+    method: 'GET',
+    data: {
+      'genre': selectVal
+    },
+    success: function(data) {
+
+      console.log('data', data);
+
+      getDisc(data);
+
+
+
+    },
+    error: function(err) {
+
+      console.log('err', err);
+
+    }
+  });
+
+
+}
+
+
+
+
 
 
 
@@ -48,4 +96,5 @@ function getDisc(discs) {
 
 $(document).ready(function() {
   getData();
+  searchInInput();
 });
